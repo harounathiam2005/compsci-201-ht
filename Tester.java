@@ -1,58 +1,50 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Tester {
     public static void main(String[] args) {
-        String[] nucleo = new String[2];
-        nucleo[0] = "atttaaa";
-        nucleo[1] = "attttttaa";
-        System.out.println(nucleo[0] + ", " + nucleo[1]);
-        System.out.println(max(nucleo, "a"));
-    }
-// return all instances of max letter presences
-// if 1: return string
-// if more than 1: return string w max length
-    public static String max(String[] strands, String nuc) {
-        int[] letters = new int[strands.length];
-        int[] lengths = new int[strands.length];
-        ArrayList<String> finalists = new ArrayList<>(0);
-        int wholeCount = 0;
-        for (int i = 0; i < strands.length; i++) {
-            int count = 0;
-            for (int x = 0; x < strands[i].length(); x++) {
-                if (strands[i].split("")[x].equals(nuc)) {
-                    wholeCount++;
-                    count++;
+        String a = "horse";
+        String b = "seems";
+        HashMap<String, Integer> mapA = new HashMap<String, Integer>(0);
+        HashMap<String, Integer> mapB = new HashMap<String, Integer>(0);
+        ArrayList<String> returnChars = new ArrayList<String>(0);
+        int count = 0;
+        for (int i = 0; i < b.length(); i++) {
+            if (mapA.keySet().contains(b.substring(i,i+1))) {
+                mapA.replace(b.substring(i,i+1), mapA.get(b.substring(i,i+1))+1);
+            }
+            else {
+                mapA.put(b.substring(i,i+1),1);
+            }
+        }
+        for (int i = 0; i < a.length(); i++) {
+            if (mapB.keySet().contains(a.substring(i,i+1))) {
+                mapB.replace(a.substring(i,i+1), mapB.get(a.substring(i,i+1))+1);
+            }
+            else {
+                mapB.put(a.substring(i,i+1),1);
+            }
+        }
+        for (String i : mapA.keySet()) {
+            System.out.println(i + ", " + mapA.get(i));
+        }
+        System.out.println("----");
+        for (String i : mapB.keySet()) {
+            System.out.println(i + ", " + mapB.get(i));
+        }
+        for (String c : mapA.keySet()) {
+            for (String c2 : mapB.keySet()) {
+                if (c.equals(c2)) {
+                    for (int i = 0; i < Integer.min(mapA.get(c),mapB.get(c2)); i++) {
+                        count++;
+                    }
                 }
             }
-            letters[i] = count;
-            lengths[i] = strands[i].length();
         }
-        if (wholeCount == 0) {
-            System.out.println(wholeCount);
-            return "";
-        }
-        int max = 0;
-        for (int j = 0; j < letters.length; j++) {
-            if (letters[j] >= max) {
-                max = letters[j];
-            }
-        } 
-        for (int x = 0; x < letters.length; x++) {
-            if (letters[x] == max) {
-                finalists.add(strands[x]);
-            }
-        }
-        int maxLength = 0;
-        int returnIndex = 0;
-        for (int j = 0; j < finalists.size(); j++) {
-            if (finalists.get(j).length() > maxLength) {
-                maxLength = finalists.get(j).length();
-                returnIndex = j;
-            }
-        }
-        return finalists.get(returnIndex);
+        System.out.println(count);
     }
-}
+
+    }
 
 /*
  * 
