@@ -1,16 +1,28 @@
 public class TrueSpace {
+    // if file size < cluster size: space used += cluster size
+    // if file size > cluster size: 
+    //  if file size % cluster size == 0:
+    //  space used += cluster size * (file size / cluster size)
+    // else:
+    //  space used += cluster size * (file size / cluster size) + 1
     public long calculateSpace(int[] sizes, int clusterSize) {
-        int count = 0;
+        long spaceUsed = 0;
         for (int s : sizes) {
-            if (s == 0)
+            if (s == 0) {
                 continue;
-            if (s <= clusterSize) {
-                count += clusterSize;
+            }
+            else if (s <= clusterSize) {
+                spaceUsed += clusterSize;
             }
             else {
-                count += clusterSize * Math.round(((double)s / clusterSize));
+                if (s % clusterSize == 0) {
+                    spaceUsed += clusterSize * (s / clusterSize);
+                }
+                else {
+                    spaceUsed += clusterSize * ((s / clusterSize) + 1);
+                }
             }
         }
-        return count;
+        return spaceUsed;
     }
  }
