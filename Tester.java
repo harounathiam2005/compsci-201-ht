@@ -2,40 +2,59 @@ import java.util.HashMap;
 
 public class Tester {
     public static void main(String[] args) {
-        String[] words =  {"6G9Lnpzw", "kA", "SyW9fFaF", "k", "SyW9fFa", "6G", "6", "SyW9f"};
+        String[] messages =  {"program","programmer","gaming","sing","NO FUN"};
+        String[] headlines = {"Programming is fun"};
 
-        isOne(words);
+        howMany(headlines, messages);
     }
 
-    public static String isOne(String[] words) {
-        HashMap<String, Integer> map = new HashMap<String, Integer>(0);
-        if (words.length == 1) {
-            return "Yes";
-        }
-        for (int i = 0; i < words.length; i++) {
-            for (int x = 0; x < words.length; x++) {
-                if (x == i) {
-                    continue;
+    public static int howMany(String[] headlines, String[] messages) {
+        HashMap<String, Integer> availableChars = new HashMap<String, Integer>(0);
+        int count = 0;
+        boolean clear;
+        // Iterate through all collections of characters, populate map with all characters in the array
+        for (String s : headlines) {
+            for (String c : s.split(" ")) {
+                for (String l : c.split("")) {
+                    String ll = l.toLowerCase();
+                    if (availableChars.containsKey(ll)) {
+                        availableChars.replace(ll, availableChars.get(ll)+1);
+                    }
+                    else {
+                        availableChars.put(ll.toLowerCase(), 1);
+                    }
                 }
-                if (words[x].length() < words[i].length() && words[x].equals(words[i].substring(0,words[x].length()))) {
-                    map.put(words[x], x);
+            }
+        }
+        for (String m : messages) {
+            clear = true;
+            HashMap<String, Integer> messageAvailability = new HashMap<String, Integer>(0);
+            for (String s : m.split(" ")) {
+                for (String c : s.split("")) {
+                    String cl = c.toLowerCase();
+                    if (messageAvailability.containsKey(c)) {
+                        messageAvailability.replace(c, messageAvailability.get(c)+1);
+                    }
+                    else {
+                        messageAvailability.put(c.toLowerCase(), 1);
+                    }
                 }
             }
-        }
-        int min = 50;
-        for (String s : map.keySet()) {
-            if (map.get(s) < min) {
-                min = map.get(s);
+            System.out.println(messageAvailability.toString());
+            for (String x : messageAvailability.keySet()) {
+                if (!availableChars.containsKey(x) || availableChars.get(x) < messageAvailability.get(x)) {
+                    System.out.println("break");
+                    clear = false;
+                    break;
+                }
             }
-        }
-        for (String s : map.keySet()) {
-            if (min == map.get(s)) {
-                System.out.println("No, " + map.get(s));
-                return "No, " + map.get(s);
+            if (clear) {
+                count++;
             }
+            messageAvailability.clear();
         }
-        System.out.println("Yes");
-        return "Yes";
+        System.out.println(count);
+        return count;
     }
 
 }

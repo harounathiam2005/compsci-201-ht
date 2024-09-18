@@ -24,11 +24,9 @@ public class PrefixCode {
         }
         for (String s : map.keySet()) {
             if (min == map.get(s)) {
-                System.out.println("No, " + map.get(s));
                 return "No, " + map.get(s);
             }
         }
-        System.out.println("Yes");
         return "Yes";
     }
 }
