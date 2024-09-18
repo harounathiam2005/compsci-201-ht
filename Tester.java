@@ -2,8 +2,8 @@ import java.util.HashMap;
 
 public class Tester {
     public static void main(String[] args) {
-        String[] messages =  {"program","programmer","gaming","sing","NO FUN"};
-        String[] headlines = {"Programming is fun"};
+        String[] messages =  {" ", " sss ", " AAA "};
+        String[] headlines = {"AaBbCc ", " ", " Zz "};
 
         howMany(headlines, messages);
     }
@@ -14,7 +14,7 @@ public class Tester {
         boolean clear;
         // Iterate through all collections of characters, populate map with all characters in the array
         for (String s : headlines) {
-            for (String c : s.split(" ")) {
+            for (String c : s.trim().split(" ")) {
                 for (String l : c.split("")) {
                     String ll = l.toLowerCase();
                     if (availableChars.containsKey(ll)) {
@@ -26,17 +26,21 @@ public class Tester {
                 }
             }
         }
+        System.out.println(availableChars.toString());
         for (String m : messages) {
             clear = true;
             HashMap<String, Integer> messageAvailability = new HashMap<String, Integer>(0);
-            for (String s : m.split(" ")) {
+            for (String s : m.trim().split(" ")) {
+                if (s.equals("")) {
+                    count++;
+                }
                 for (String c : s.split("")) {
                     String cl = c.toLowerCase();
-                    if (messageAvailability.containsKey(c)) {
-                        messageAvailability.replace(c, messageAvailability.get(c)+1);
+                    if (messageAvailability.containsKey(cl)) {
+                        messageAvailability.replace(cl, messageAvailability.get(cl)+1);
                     }
                     else {
-                        messageAvailability.put(c.toLowerCase(), 1);
+                        messageAvailability.put(cl.toLowerCase(), 1);
                     }
                 }
             }
@@ -50,6 +54,9 @@ public class Tester {
             }
             if (clear) {
                 count++;
+            }
+            if (messageAvailability.containsKey("") && availableChars.containsKey("")) {
+                count--;
             }
             messageAvailability.clear();
         }
