@@ -1,10 +1,4 @@
 public class TrueSpace {
-    // if file size < cluster size: space used += cluster size
-    // if file size > cluster size: 
-    //  if file size % cluster size == 0:
-    //  space used += cluster size * (file size / cluster size)
-    // else:
-    //  space used += cluster size * (file size / cluster size) + 1
     public long calculateSpace(int[] sizes, int clusterSize) {
         long spaceUsed = 0;
         for (int s : sizes) {

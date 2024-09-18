@@ -1,13 +1,7 @@
 import java.util.HashMap;
 
-public class Tester {
-    public static void main(String[] args) {
-        String[] words =  {"6G9Lnpzw", "kA", "SyW9fFaF", "k", "SyW9fFa", "6G", "6", "SyW9f"};
-
-        isOne(words);
-    }
-
-    public static String isOne(String[] words) {
+public class PrefixCode { 
+    public String isOne(String[] words) {
         HashMap<String, Integer> map = new HashMap<String, Integer>(0);
         if (words.length == 1) {
             return "Yes";
@@ -37,5 +31,4 @@ public class Tester {
         System.out.println("Yes");
         return "Yes";
     }
-
 }
