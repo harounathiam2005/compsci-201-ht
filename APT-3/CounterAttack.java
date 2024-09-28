@@ -13,8 +13,7 @@ public class CounterAttack {
         }
         int[] ret = new int[words.length];
         for (int i = 0; i < ret.length; i++) {
-            ret[i] = 0;
-            if (map.containsKey(words[i]) == false) {
+            if (!map.containsKey(words[i])) {
                 continue;
             }
             ret[i] = map.get(words[i]);
