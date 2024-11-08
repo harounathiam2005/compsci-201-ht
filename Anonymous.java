@@ -36,10 +36,8 @@ public class Anonymous {
                     }
                 }
             }
-            System.out.println(messageAvailability.toString());
             for (String x : messageAvailability.keySet()) {
                 if (!availableChars.containsKey(x) || availableChars.get(x) < messageAvailability.get(x)) {
-                    System.out.println("break");
                     clear = false;
                     break;
                 }
