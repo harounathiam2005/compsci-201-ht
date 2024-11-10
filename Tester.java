@@ -1,12 +1,16 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import APT_Quiz1.*;
 
 public class Tester {
     public static void main(String[] args) {
-        String[] messages =  {" ", " sss ", " AAA "};
-        String[] headlines = {"AaBbCc ", " ", " Zz "};
+        String[] arr = new String[]{"eme", "eye", "bab", "ela"};
 
-        howMany(headlines, messages);
+        for (String s : EndOfWords.filter(arr))
+            System.out.println(s);
     }
+
 
     public static int howMany(String[] headlines, String[] messages) {
         HashMap<String, Integer> availableChars = new HashMap<String, Integer>(0);
