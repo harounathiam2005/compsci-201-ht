@@ -47,6 +47,7 @@ public class TournamentRanker {
             return this.lostToName;
         }
 
+        //debugging
         public String toString() {
             return "Name: " + getName() + ", Lost To: " + getLostToName() + ", Wins: " + getWins(); 
         }
