@@ -1,18 +1,7 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import APT_Quiz1.*;
 
-public class Tester {
-    public static void main(String[] args) {
-        String[] arr = new String[]{"eme", "eye", "bab", "ela"};
-
-        for (String s : EndOfWords.filter(arr))
-            System.out.println(s);
-    }
-
-
-    public static int howMany(String[] headlines, String[] messages) {
+public class Anonymous {
+    public int howMany(String[] headlines, String[] messages) {
         HashMap<String, Integer> availableChars = new HashMap<String, Integer>(0);
         int count = 0;
         boolean clear;
@@ -30,7 +19,6 @@ public class Tester {
                 }
             }
         }
-        System.out.println(availableChars.toString());
         for (String m : messages) {
             clear = true;
             HashMap<String, Integer> messageAvailability = new HashMap<String, Integer>(0);
@@ -48,10 +36,8 @@ public class Tester {
                     }
                 }
             }
-            System.out.println(messageAvailability.toString());
             for (String x : messageAvailability.keySet()) {
                 if (!availableChars.containsKey(x) || availableChars.get(x) < messageAvailability.get(x)) {
-                    System.out.println("break");
                     clear = false;
                     break;
                 }
@@ -67,5 +53,4 @@ public class Tester {
         System.out.println(count);
         return count;
     }
-
-}
+ }
