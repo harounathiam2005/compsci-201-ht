@@ -3,6 +3,7 @@ import java.util.*;
 public class TournamentRanker {
 
     public class Player {
+        
         String name;
         int wins;
         Player lostTo;
