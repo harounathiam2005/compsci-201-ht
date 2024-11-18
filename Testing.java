@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Tester {
+public class Testing {
     public static void main(String[] args) {
         System.out.println("Running main in Tester class...");
         System.out.println(reverse("HI!"));

@@ -20,7 +20,7 @@ public class SortByFreqs {
             return frequencyCompare;
         });
 
-        LinkedHashSet<String> uniqueSortedStrings = new LinkedHashSet<>(Arrays.asList(data));
+        Set<String> uniqueSortedStrings = new HashSet<>(Arrays.asList(data));
 
         return uniqueSortedStrings.toArray(new String[0]);
     }
