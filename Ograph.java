@@ -1,33 +1,45 @@
 import java.util.*;
-import java.util.Stack;
 
 public class Ograph {
-    Map<String,Set<String>> myGraph = new HashMap<>();
+
+    static Map<String,Set<String>> graph = new HashMap<>(0);
+
     public int[] components(String[] data) {
         makeGraph(data);
-        Set<String> visited = new HashSet<>();
-        ArrayList<Integer> list = new ArrayList<>();
-        for (String v : myGraph.keySet()) {
-            if (! visited.contains(v)) {
-                Set<String> reachable = dfs(v);
-                visited.addAll(reachable);
-                list.add(reachable.size());
-            }
+        for (String s : graph.keySet()) {
+            System.out.println(s + ", " + graph.get(s).toString());
         }
-        return new int[0];
+        System.out.println(" ---------- ");
+        Set<String> visited = new HashSet<>(0);
+        List<Integer> sizeHolder = new ArrayList<>(0);
+        for (String node : graph.keySet()) { // iterate over each node
+            if (! visited.contains(node)) {
+                Set<String> adjacents = getAdjacentsWithDFS(node); // get all connected nodes
+                sizeHolder.add(adjacents.size());
+                visited.addAll(adjacents);
+            }
+        }   
+        System.out.println(sizeHolder.size() + " SIZE!");
+        int[] ret = new int[sizeHolder.size()];
+        for (int k = 0; k < sizeHolder.size(); k++) {
+            ret[k] = sizeHolder.get(k);
+        }
+        Arrays.sort(ret);
+        return ret;
     }
 
-    private Set<String> dfs(String vertex) {
-        Stack<String> stack = new Stack<>(0);
-        Set<String> visited = new HashSet<>(0);
-        stack.push(vertex);
+    public Set<String> getAdjacentsWithDFS(String vertex) {
+        Stack<String> stack = new Stack<>();
+        Set<String> visited = new HashSet<String>(0);
+        stack.push(vertex); // push current node to the top of the stack for processing
         visited.add(vertex);
         while (stack.size() > 0) {
-            String v = stack.pop();
-            for (String adj : myGraph.get(v)) {
-                if (! visited.contains(v)) {
-                    visited.add(adj);
+            vertex = stack.pop(); // replace node with the value of the item on the top of the stack
+            //List<String> adjacentNodes = Arrays.asList(graph.get(vertex).toArray(new String[0]));
+            for (String adj : graph.get(vertex)) {
+                if (! visited.contains(adj)) {
                     stack.push(adj);
+                    visited.add(adj);
                 }
             }
         }
@@ -35,7 +47,13 @@ public class Ograph {
     }
 
     public void makeGraph(String[] data) {
-        Map<Integer,HashSet<String>> map = new HashMap<>(0);
-        
+        for (int i = 0; i < data.length; i++) {
+            String[] adjacents = data[i].split(" ");
+            graph.put(data[i]+"", new TreeSet<>());
+            for (String adj : adjacents) {
+                graph.get(adjacents[i]+"").add(adj);
+            }
+            //graph.put(i+"", new TreeSet<String>(Arrays.asList(adjacents)));
+        }
     }
 }
